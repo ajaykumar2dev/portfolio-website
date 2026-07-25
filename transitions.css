@@ -1,0 +1,204 @@
+/* Shared motion language for the portfolio and project workflow pages. */
+:root {
+  --motion-fast: 180ms;
+  --motion-base: 360ms;
+  --motion-slow: 620ms;
+  --motion-ease: cubic-bezier(.22, 1, .36, 1);
+  --motion-exit: cubic-bezier(.4, 0, 1, 1);
+  --motion-accent: var(--accent-2, var(--cyan, var(--green, #39d98a)));
+}
+
+.motion-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 2px;
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: var(--motion-accent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--motion-accent) 60%, transparent);
+  will-change: transform;
+}
+
+/* Keep first paint stable; card-level motion replaces the older full-section fade. */
+.js .reveal,
+.js .reveal.visible {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.hero-content,
+.hero-photo {
+  opacity: 1 !important;
+  animation: none !important;
+}
+
+.motion-ready [data-motion] {
+  opacity: 1;
+  transform: translateY(12px);
+  transition:
+    opacity var(--motion-slow) var(--motion-ease),
+    transform var(--motion-slow) var(--motion-ease);
+  transition-delay: var(--motion-delay, 0ms);
+}
+
+.motion-ready [data-motion].motion-in {
+  opacity: 1;
+  transform: none;
+}
+
+.motion-surface {
+  --pointer-x: 50%;
+  --pointer-y: 50%;
+  background-image: radial-gradient(
+    280px circle at var(--pointer-x) var(--pointer-y),
+    color-mix(in srgb, var(--motion-accent) 9%, transparent),
+    transparent 72%
+  );
+  transition:
+    transform var(--motion-base) var(--motion-ease),
+    border-color var(--motion-base) ease,
+    box-shadow var(--motion-base) ease,
+    background-color var(--motion-base) ease;
+}
+
+.motion-surface:hover {
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .24);
+}
+
+.linked-project-card {
+  cursor: pointer;
+}
+
+.linked-project-card:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--motion-accent) 70%, transparent);
+  outline-offset: 3px;
+}
+
+.motion-surface .step-icon,
+.motion-surface .stage-icon,
+.motion-surface .node-icon,
+.motion-surface .node-code,
+.motion-surface .skill-icon,
+.motion-surface .gate-icon,
+.motion-surface .evidence-grid i {
+  transition: transform var(--motion-base) var(--motion-ease), box-shadow var(--motion-base) ease;
+}
+
+.motion-surface:hover .step-icon,
+.motion-surface:hover .stage-icon,
+.motion-surface:hover .node-icon,
+.motion-surface:hover .node-code,
+.motion-surface:hover .skill-icon,
+.motion-surface:hover .gate-icon {
+  transform: translateY(-2px) rotate(-2deg) scale(1.06);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .2);
+}
+
+details > :not(summary) {
+  transform-origin: top;
+}
+
+details[open] > :not(summary) {
+  animation: details-enter 300ms var(--motion-ease) both;
+}
+
+details summary {
+  transition: color var(--motion-fast) ease, padding-left var(--motion-base) var(--motion-ease);
+}
+
+details summary:hover {
+  padding-left: .3rem;
+}
+
+.detail-panel,
+.drawer {
+  top: 0 !important;
+  bottom: 0 !important;
+  height: 100dvh !important;
+  max-height: 100dvh !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+}
+
+.detail-panel.open > *,
+.drawer.open > * {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+.detail-head,
+.detail-panel-head,
+.drawer-head {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 4;
+  padding-block: .45rem;
+  background: #091522;
+}
+
+.backdrop,
+.panel-backdrop {
+  background: rgba(0, 0, 0, .48) !important;
+  backdrop-filter: blur(1px) !important;
+}
+
+.btn,
+.control-button,
+.run-button,
+.reset-button,
+.filter-button,
+.filters button,
+.lane-filters button {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn::after,
+.control-button::after,
+.run-button::after,
+.reset-button::after,
+.filter-button::after,
+.filters button::after,
+.lane-filters button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(255, 255, 255, .13);
+  transform: translateX(-105%) skewX(-18deg);
+  transition: transform 440ms var(--motion-ease);
+}
+
+.btn:hover::after,
+.control-button:hover::after,
+.run-button:hover::after,
+.reset-button:hover::after,
+.filter-button:hover::after,
+.filters button:hover::after,
+.lane-filters button:hover::after {
+  transform: translateX(105%) skewX(-18deg);
+}
+
+@keyframes details-enter {
+  from { opacity: 0; transform: translateY(-7px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  details[open] > :not(summary),
+  .motion-ready [data-motion] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .motion-surface,
+  .motion-surface * {
+    transition: none !important;
+  }
+}
