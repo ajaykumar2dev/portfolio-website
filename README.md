@@ -13,9 +13,9 @@ Static data engineering portfolio for Ajay Kumar.
 ```powershell
 python -m http.server 5500
 ```
-Open `http://localhost:5500`.
+
 
 ## Customize
 1. Add a LinkedIn or GitHub URL to `index.html` when available.
 2. Add a downloadable resume PDF when available.
-3. Update `robots.txt` and `sitemap.xml` with the final domain before deployment.
+3. Update `robots.txt` and `sitemap.xml` with the final domain before deployment
