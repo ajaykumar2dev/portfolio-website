@@ -148,6 +148,14 @@
   transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
 }
 
+.projects-grid:has(.project-details[open]) {
+  align-items: start;
+}
+
+.projects-grid:has(.project-details[open]) .project-card {
+  height: auto;
+}
+
 .project-card:hover {
   transform: translateY(-4px);
   border-color: rgba(112, 225, 177, .34);
