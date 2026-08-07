@@ -193,38 +193,78 @@
         <article class="project-card">
           <div class="project-topline">
             <span class="project-index">02 / ANALYTICS</span>
-            <span class="project-kicker">Enterprise integration</span>
+            <span class="project-kicker">Automotive data engineering</span>
           </div>
-          <h3>Enterprise Engineering Analytics Platform</h3>
-          <p class="project-summary">Built integration and reporting workflows that consolidated engineering data from four enterprise platforms into BigQuery for project-health, quality and performance reporting.</p>
+          <h3>Vehicle Quality Data Platform</h3>
+          <p class="project-summary">Built scalable batch and incremental pipelines on GCP to transform vehicle quality and manufacturing data into analytics-ready datasets for quality reporting and decision-making.</p>
           <div class="tech-list" aria-label="Project technologies">
-            <span>Python</span><span>SQL</span><span>Pandas</span><span>BigQuery</span><span>REST APIs</span><span>Power BI</span><span>Spotfire</span>
+            <span>Python</span><span>SQL</span><span>PySpark</span><span>BigQuery</span><span>GCP</span><span>Airflow</span><span>REST APIs</span><span>Power BI</span>
           </div>
           <details class="project-details">
             <summary>View Details <span aria-hidden="true">+</span></summary>
             <div class="project-detail-content">
               <section>
                 <h4>Business problem</h4>
-                <p>Project-health and quality reporting depended on data spread across multiple enterprise applications and required repetitive manual preparation.</p>
+                <p>Vehicle quality and manufacturing data was distributed across operational systems and APIs, with duplicates, missing values, inconsistent formats and schema changes delaying reporting and increasing processing costs.</p>
+              </section>
+              <section>
+                <h4>Project overview</h4>
+                <p>Developed a cloud-based vehicle quality platform at KPIT Technologies for the automotive / Renault domain, integrating vehicle, manufacturing, component, plant, supplier, defect, warranty and corrective-action data for trusted quality analytics.</p>
               </section>
               <section>
                 <h4>Architecture</h4>
-                <ol class="flow-steps" aria-label="Enterprise analytics data flow">
-                  <li>Jira / Confluence / SharePoint / CodeBeamer</li><li>Python REST API integration</li><li>Cleansing and validation</li><li>BigQuery</li><li>Power BI / Spotfire</li>
+                <ol class="flow-steps" aria-label="Vehicle quality platform architecture">
+                  <li>REST APIs / source systems</li><li>Python extraction</li><li>Google Cloud Storage</li><li>BigQuery raw</li><li>Standardized</li><li>Transformation</li><li>Curated</li><li>Power BI / Spotfire</li>
                 </ol>
+                <p>Orchestration: Cloud Composer / Apache Airflow.</p>
+              </section>
+              <section>
+                <h4>Data pipeline</h4>
+                <ol class="flow-steps" aria-label="Vehicle quality data pipeline">
+                  <li>Composer trigger</li><li>REST API extraction</li><li>Pagination</li><li>GCS raw files</li><li>BigQuery staging</li><li>SQL / PySpark transformation</li><li>Deduplication</li><li>BigQuery MERGE</li><li>Quality validation</li><li>Curated analytics</li>
+                </ol>
+                <p>Cloud Logging and Cloud Monitoring provide execution visibility and operational alerts.</p>
+              </section>
+              <section>
+                <h4>Incremental processing</h4>
+                <p>Implemented watermark-based ingestion using updated timestamps, modified dates, created dates or the maximum processed ID.</p>
+                <ol class="flow-steps" aria-label="Incremental processing flow">
+                  <li>Previous watermark</li><li>Incremental API extraction</li><li>GCS</li><li>BigQuery staging</li><li>Validation</li><li>MERGE to target</li><li>Update watermark</li>
+                </ol>
+              </section>
+              <section>
+                <h4>Data quality</h4>
+                <ul class="check-grid">
+                  <li>Duplicate detection</li><li>Null validation</li><li>Data-type validation</li><li>Date-format validation</li><li>Primary-key uniqueness</li><li>Referential integrity</li><li>Accepted values</li><li>Source-to-target reconciliation</li><li>Freshness checks</li>
+                </ul>
+              </section>
+              <section>
+                <h4>BigQuery optimization</h4>
+                <ul class="check-grid">
+                  <li>Partitioning and clustering</li><li>Incremental processing</li><li>Partition pruning</li><li>Optimized joins</li><li>Explicit column selection</li><li>Pre-aggregated datasets</li><li>Reduced table scans</li><li>MERGE-based loading</li>
+                </ul>
+              </section>
+              <section>
+                <h4>Production support</h4>
+                <p>Monitored Airflow DAGs and investigated API, authentication, schema, BigQuery load, duplicate-key, SQL, source-data, timeout and resource failures. Used retries, selective reruns, backfills and detailed logging to recover workflows.</p>
               </section>
               <section>
                 <h4>Key responsibilities</h4>
                 <ul>
-                  <li>Integrated four enterprise platforms using authenticated, paginated and incremental API workflows.</li>
-                  <li>Developed Python and SQL ETL workflows plus BigQuery transformations using CTEs and window functions.</li>
-                  <li>Implemented missing, duplicate and consistency checks and prepared analytical datasets and KPIs.</li>
-                  <li>Supported dashboard development and automated Jira extraction and reporting workflows.</li>
+                  <li>Developed Python REST API ingestion with authentication, pagination, retries, error handling and incremental extraction.</li>
+                  <li>Built SQL and PySpark transformations across raw, standardized, transformation and curated BigQuery layers.</li>
+                  <li>Implemented watermark logic and BigQuery MERGE for new and updated records.</li>
+                  <li>Added automated quality checks for duplicates, nulls, schemas, integrity, freshness and reconciliation.</li>
+                  <li>Orchestrated and monitored production pipelines with Cloud Composer, Airflow, Cloud Logging and Cloud Monitoring.</li>
                 </ul>
               </section>
               <section class="project-result">
                 <h4>Outcome</h4>
-                <p>Reduced manual data-preparation and reporting effort by around 50% and improved the availability of reporting data.</p>
+                <p>Automated vehicle-quality processing, improved data reliability and availability, optimized BigQuery workloads, and enabled faster analysis of defects, component issues, manufacturing trends and quality KPIs.</p>
+                <ul>
+                  <li>Processed approximately 1–2M records and 100–200 GB of data daily.</li>
+                  <li>Reduced processing cost by roughly 25–35%, improved execution time by around 30%, and cut manual reporting effort by approximately 50–60%.</li>
+                </ul>
               </section>
             </div>
           </details>
